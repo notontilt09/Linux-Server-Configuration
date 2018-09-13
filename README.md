@@ -16,7 +16,7 @@
 
 1. Run `sudo apt-get update`
 
-2. Run 'sudo apt-get upgrade'
+2. Run `sudo apt-get upgrade`
 
 ## Change SSH port from 22 to 2200
 
@@ -26,7 +26,7 @@
 
 3. Change port from 22 to 2200
 
-4. Under #Authentication, change `PermitRootLogin` to `no` to disable the ability to login as the root user.
+4. Under `#Authentication`, change `PermitRootLogin` to `no` to disable the ability to login as the root user.
 
 5. Save and Exit the file then restart sshd with `sudo service sshd restart`
 
@@ -49,6 +49,8 @@ Configure the firewall to only accept connections for SSH on port 2200, HTTP on 
 
 3. Edit the sudo file and add `grader ALL=(ALL:ALL) NOPASSWD:ALL` under the line `root ALL=(ALL:ALL)`
 
+4. Grader user can now sudo with no password requirement.
+
 ## Create SSH keypair to login as grader
 
 1. From home computer terminal, run `ssh-keygen`
@@ -65,7 +67,6 @@ Configure the firewall to only accept connections for SSH on port 2200, HTTP on 
 
 7. Can now log in as grader from terminal with `ssh -i ~/.ssh/graderkey grader@18.206.229.83 -p 2200`
 
-8.
 
 
 
