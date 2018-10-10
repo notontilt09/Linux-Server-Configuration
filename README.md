@@ -67,6 +67,39 @@ Configure the firewall to only accept connections for SSH on port 2200, HTTP on 
 
 7. Can now log in as grader from terminal with `ssh -i ~/.ssh/graderkey grader@18.206.229.83 -p 2200`
 
+## Configure the local timezone to UTC
+
+1. Run `sudo dpkg-reconfigure tzdata`
+
+2. Select UTC from the list of available time zones.
+
+## Configure Apache to serve a Python mod_wsgi application
+
+1. Install apache `sudo apt-get install apache2`
+
+2. In local browser, navigate to the public IP address provided by the Amazon Lightsail instance.  The 'Apache2 Ubuntu Default Page' should show up now.
+
+3. Install mod_wsgi `sudo apt-get install libapache2-mod-wsgi python-dev`
+
+4. Enable mod_wsgi `sudo a2enmod wsgi`
+
+5. Edit the `/etc/apache2/sites-enabled/000-default.conf` file to tell apache how to respond to requests, and where to find the files for a particular site.
+
+At the end of the `<VirtualHost *:80>` block, add the following line `WSGIScriptAlias / /var/www/html/myapp.wsgi`
+
+6. Restart Apache with `sudo apache2ctl restart`
+
+7. Create the myapp.wsgi file using the command `sudo nano /var/www/html/myapp.wsgi` and add the following code to deploy a simple application displaying 'Hello World' to the user
+`def application(environ, start_response):
+	status = '200 OK'
+	output = 'Hello World!'
+
+	response_headers = [('Content-type', 'text/plain'), ('Content-Length', str(len(output)))]
+	start_response(status, response_headers)
+
+	return [output]`
+
+8.  Reload the browser navigating to the Lightstail public IP to see 'Hello World!' displayed.
 
 
 
