@@ -90,14 +90,14 @@ At the end of the `<VirtualHost *:80>` block, add the following line `WSGIScript
 6. Restart Apache with `sudo apache2ctl restart`
 
 7. Create the myapp.wsgi file using the command `sudo nano /var/www/html/myapp.wsgi` and add the following code to deploy a simple application displaying 'Hello World' to the user
-`def application(environ, start_response):
+```def application(environ, start_response):
 	status = '200 OK'
 	output = 'Hello World!'
 
 	response_headers = [('Content-type', 'text/plain'), ('Content-Length', str(len(output)))]
 	start_response(status, response_headers)
 
-	return [output]`
+	return [output]```
 
 8.  Reload the browser navigating to the Lightstail public IP to see 'Hello World!' displayed.
 
