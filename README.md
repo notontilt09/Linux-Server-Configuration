@@ -97,7 +97,8 @@ At the end of the `<VirtualHost *:80>` block, add the following line `WSGIScript
 	response_headers = [('Content-type', 'text/plain'), ('Content-Length', str(len(output)))]
 	start_response(status, response_headers)
 
-	return [output]```
+	return [output]
+```
 
 8.  Reload the browser navigating to the Lightstail public IP to see 'Hello World!' displayed.
 
