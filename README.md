@@ -118,7 +118,7 @@ sudo mkdir catalog
 cd catalog
 sudo mkdir static templates
 ```
-	The directory structure will look like the following:
+The directory structure will look like the following:
 	```
 	---catalog
 	------catalog
@@ -138,7 +138,7 @@ sudo mkdir static templates
 	if __name__ == "__main__":
 		app.run()
 		```
-	Save and close the file.
+Save and close the file.
 
 4.  Install Flask inside a virtual environment to run the flask application:
 ```
