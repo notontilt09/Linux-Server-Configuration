@@ -210,5 +210,7 @@ The directory structure should look like this:
 
 9. Restart Apache with `sudo service apache2 restart`
 
+10. The browser navigating to the public IP should now display the __init__.py file.
+
 
 
