@@ -102,5 +102,113 @@ At the end of the `<VirtualHost *:80>` block, add the following line `WSGIScript
 
 8.  Reload the browser navigating to the Lightstail public IP to see 'Hello World!' displayed.
 
+## Install Git
+
+1. Run `sudo apt-get install git`
+
+## Deploy Flask application
+
+1. Move to the /var/www directory `cd /var/www`
+
+2. Create the directory structure to be used for the project with the following commands
+```
+sudo mkdir catalog
+cd catalog
+sudo mkdir catalog
+cd catalog
+sudo mkdir static templates
+```
+	The directory structure will look like the following:
+	```
+	---catalog
+	------catalog
+	---------static
+	---------templates
+	```
+
+3. Create the __init__.py file that will contain the flask application logic `sudo nano __init__.py`
+
+	Add the following logic to the file:
+	```
+	from flask import Flask
+	app = Flask(__name__)
+	@app.route("/")
+	def hello():
+		return "Hello, There!"
+	if __name__ == "__main__":
+		app.run()
+		```
+	Save and close the file.
+
+4.  Install Flask inside a virtual environment to run the flask application:
+```
+sudo apt-get install python-pip
+sudo pip install virtualenv
+sudo virtualenv venv
+source venv/bin/activate
+sudo pip install Flask
+```
+
+5.  Check if the installation is successfull and the app in running:
+`sudo python __init__.py`
+	If successful, it will display "Running on http://127.0.0.1:5000/"
+
+6.  Use CTRL+C to quit the Flask app and then `deactivate` to deactivate the virtual environment.
+
+7. Configure and Enable a New Virtual Host
+`sudo nano /etc/apache2/sites-available/catalog.conf`
+
+  Add the following code using the Amazon Lightsail Public IP as the ServerName:
+
+  ```
+  <VirtualHost *:80>
+		ServerName 54.173.178.203
+		ServerAdmin notontilt09@gmail.com
+		WSGIScriptAlias / /var/www/catalog/catalog.wsgi
+		<Directory /var/www/catalog/catalog/>
+			Order allow,deny
+			Allow from all
+		</Directory>
+		Alias /static /var/www/catalog/catalog/static
+		<Directory /var/www/catalog/catalog/static/>
+			Order allow,deny
+			Allow from all
+		</Directory>
+		ErrorLog ${APACHE_LOG_DIR}/error.log
+		LogLevel warn
+		CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+8. Create the .wsgi file:
+```
+cd /var/www/catalog
+sudo nano catalog.wsgi
+```
+  Add the following code to the catalog.wsgi file:
+ ```
+ #!/usr/bin/python
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0,"/var/www/catalog/")
+
+from catalog import app as application
+application.secret_key = 'Add your secret key'
+```
+
+The directory structure should look like this:
+```
+---catalog
+------catalog
+---------static
+---------templates
+---------venv
+---------__init__.py
+------catalog.wsgi
+```
+
+9. Restart Apache with `sudo service apache2 restart`
+
 
 
