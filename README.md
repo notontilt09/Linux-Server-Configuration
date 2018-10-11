@@ -119,12 +119,12 @@ cd catalog
 sudo mkdir static templates
 ```
 The directory structure will look like the following:
-	```
-	---catalog
-	------catalog
-	---------static
-	---------templates
-	```
+```
+---catalog
+------catalog
+---------static
+---------templates
+```
 
 3. Create the __init__.py file that will contain the flask application logic `sudo nano __init__.py`
 
