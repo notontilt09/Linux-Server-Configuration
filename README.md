@@ -214,3 +214,31 @@ The directory structure should look like this:
 
 
 
+##Clone item catalog repository
+
+1. In the `catalog` directory, clone the item catalog repository with `sudo git clone https://github.com/notontilt09/fortnite.git`
+
+##Install necessary Flask and SQL packages in the virtual environment
+
+1. In the `catalog` folder containing the `venv` virtual environment, install the followwing packages that are used in the item catalog python files
+```
+sudo pip install requests
+sudo pip install httplib2
+sudo pip install oauth2client
+sudo pip install sqlalchemy
+sudo pip install Flask-SQLAlchemy
+```
+## Change item catalog python files from sqlite to postgresql
+
+1. Three files are using the sqlite database schema to serve the data:  `fortnite_database_setup.py`, `fortnite_catalog.py`, and `add_weapons.py`.  In each of these files, change the line:
+`engine = create_engine('sqlite:fortniteweapondatabase.db') to `engine = create_engine('postgresql://catalog:catalog-pw@localhost/catalog')
+
+##Install Postgresql
+
+1. Install psycopg2 `sudo apt-get install python-psycopg2`
+
+2. Install Postgresql `sudo apt-get install postgresql postgresql-contrib`
+
+
+
+References: https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
