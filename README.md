@@ -231,7 +231,7 @@ sudo pip install Flask-SQLAlchemy
 ## Change item catalog python files from sqlite to postgresql
 
 1. Three files are using the sqlite database schema to serve the data:  `fortnite_database_setup.py`, `fortnite_catalog.py`, and `add_weapons.py`.  In each of these files, change the line:
-`engine = create_engine('sqlite:fortniteweapondatabase.db') to `engine = create_engine('postgresql://catalog:catalog-pw@localhost/catalog')
+`engine = create_engine('sqlite:fortniteweapondatabase.db') to `engine = create_engine('postgresql://catalog:catalog-pw@localhost/catalog')`
 
 ## Install Postgresql
 
