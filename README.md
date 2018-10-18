@@ -227,18 +227,47 @@ sudo pip install httplib2
 sudo pip install oauth2client
 sudo pip install sqlalchemy
 sudo pip install Flask-SQLAlchemy
+sudo pip install passlib
 ```
 ## Change item catalog python files from sqlite to postgresql
 
 1. Three files are using the sqlite database schema to serve the data:  `fortnite_database_setup.py`, `fortnite_catalog.py`, and `add_weapons.py`.  In each of these files, change the line:
 `engine = create_engine('sqlite:fortniteweapondatabase.db')` to `engine = create_engine('postgresql://catalog:catalog-pw@localhost/catalog')`
 
-## Install Postgresql
+## Install Postgresql and set up database
 
 1. Install psycopg2 `sudo apt-get install python-psycopg2`
 
 2. Install Postgresql `sudo apt-get install postgresql postgresql-contrib`
 
+3. Change to the postgres user `sudo su - postgres`
+
+4. Open postgresql `psql`
+
+5. Create catalog user and give it the correct access
+```
+CREATE USER catalog WITH PASSWORD 'catalog-pw';
+ALTER USER catalog CREATEDB;
+CREATE DATABASE catalog WITH OWNER catalog;
+\c catalog
+REVOKE ALL ON SCHEMA public FROM public;
+GRANT ALL ON SCHEMA public TO catalog;
+\q
+exit
+```
+This will create the database with the correct permissions established.  We can now run the item catalog python files to fill this database with data.
+
+## Update the `__init__.py` file to correctly locate the `client_secrets.json` file
+
+1. In `__init__.py` change the line `CLIENT_ID = json.loads( open('client_secrets.json', 'r').read())['web']['client_id']` to `CLIENT_ID = json.loads(open(r'/var/www/catalog/catalog/client_secrets.json', 'r').read())['web']['client_id']`
 
 
-References: https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
+
+
+
+
+## References
+
+1. https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
+
+2. Udacity Linux Server Configuration course and discussion forums.
