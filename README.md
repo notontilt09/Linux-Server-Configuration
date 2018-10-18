@@ -214,11 +214,11 @@ The directory structure should look like this:
 
 
 
-##Clone item catalog repository
+## Clone item catalog repository
 
 1. In the `catalog` directory, clone the item catalog repository with `sudo git clone https://github.com/notontilt09/fortnite.git`
 
-##Install necessary Flask and SQL packages in the virtual environment
+## Install necessary Flask and SQL packages in the virtual environment
 
 1. In the `catalog` folder containing the `venv` virtual environment, install the followwing packages that are used in the item catalog python files
 ```
@@ -233,7 +233,7 @@ sudo pip install Flask-SQLAlchemy
 1. Three files are using the sqlite database schema to serve the data:  `fortnite_database_setup.py`, `fortnite_catalog.py`, and `add_weapons.py`.  In each of these files, change the line:
 `engine = create_engine('sqlite:fortniteweapondatabase.db') to `engine = create_engine('postgresql://catalog:catalog-pw@localhost/catalog')
 
-##Install Postgresql
+## Install Postgresql
 
 1. Install psycopg2 `sudo apt-get install python-psycopg2`
 
