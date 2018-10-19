@@ -6,6 +6,7 @@ SSH port: 2200
 
 Application URL: `http://54.173.178.203` or `http://54.173.178.203.xip.io/` or `http://ec2-54-173-178-203.compute-1.amazonaws.com/`
 
+User grader password: 'grader'
 
 # Setup Guide
 
