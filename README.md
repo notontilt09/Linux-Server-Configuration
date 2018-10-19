@@ -261,12 +261,20 @@ This will create the database with the correct permissions established.  We can 
 
 1. In `__init__.py` change the line `CLIENT_ID = json.loads( open('client_secrets.json', 'r').read())['web']['client_id']` to `CLIENT_ID = json.loads(open(r'/var/www/catalog/catalog/client_secrets.json', 'r').read())['web']['client_id']`
 
+## Run the program
+
+1. Run `python fortnite_database_setup.py` to setup the postgreSQLdatabase
+
+2. Run `python add_weapons.py` to add the information to the postgreSQL database
+
+3. Run 'python __init__.py' to run the actual application
+
+4. The application should now run on `http://http://54.173.178.203/`.
 
 
 
 
-
-## References
+## Third Party References
 
 1. https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
 
